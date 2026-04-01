@@ -27,7 +27,7 @@ public class Product {
     private String prodStory;
 
     @DecimalMin("0.0")
-    private Double prodPrice;
+    private Long prodPrice;
 
     private String prodImgURL;
 

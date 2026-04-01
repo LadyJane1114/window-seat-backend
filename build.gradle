@@ -38,6 +38,10 @@ dependencies {
     implementation 'org.postgresql:postgresql'
     // Validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+//    stripeeee
+    implementation 'com.stripe:stripe-java:31.2.0'
+//    version was chosen on because Mike tested it, and knows that this version works.
 }
 
 tasks.named('test') {
