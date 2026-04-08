@@ -11,8 +11,7 @@ public class LineItemCreateDTO {
     @Positive
     private Integer quantity;
 
-    @DecimalMin("0.0")
-    private Double unitPrice;
+    private Long unitPrice;
 
     @NotNull
     private Long productId;

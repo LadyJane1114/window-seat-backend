@@ -26,7 +26,6 @@ public class Product {
     @Column(length = 2000)
     private String prodStory;
 
-    @DecimalMin("0.0")
     private Long prodPrice;
 
     private String prodImgURL;

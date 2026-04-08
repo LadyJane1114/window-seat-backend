@@ -27,7 +27,7 @@ public class Purchase {
     private boolean purchaseIsPaid;
 
     @DecimalMin("0.0")
-    private Double purchaseTotal;
+    private Long purchaseTotal;
 
     private LocalDateTime purchaseDateTime;
 

@@ -9,6 +9,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,13 +23,13 @@ public class CheckoutController {
     private final ProductService productService;
 
 
-    public CheckoutController(ProductService productService){
+    public CheckoutController(ProductService productService,@Value("{stripe.api.key") String STRIPE_KEY){
         this.productService = productService;
 
-        Stripe.apiKey = "sk_test_51T2GDsDlTUkLxqzESPEbfwEOV2F1n1ByAQfKvOzn7RV06AriJU1DM4s7r1HXBcDOyDtX6ainCzywhKP2zhhlzbby00jNgGQy62";
+        Stripe.apiKey = STRIPE_KEY;
     }
 
-//post mapping
+    //post mapping
     @PostMapping("/create-checkout-session")
     public Map<String, String> createCheckoutSession(@RequestBody CartDTO cart) throws StripeException {
         String FRONTEND_DOMAIN = "http://localhost:5173";
@@ -49,11 +50,16 @@ public class CheckoutController {
                     SessionCreateParams.LineItem.builder()
                             .setQuantity(cartItem.getQuantity())
                             .setPriceData(
-                                    SessionCreateParams.LineItem.builder(
-
-                                    )
-                            )
-            )
+                                    SessionCreateParams.LineItem.PriceData.builder()
+                                            .setCurrency("cad")
+                                            .setUnitAmount(price)
+                                            .setProductData(
+                                                    SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                                            .setName(product.getProdName())
+                                                            .build()
+                                            ).build()
+                            ).build()
+            );
         }
         SessionCreateParams params = paramsBuilder.build();
         Session session = Session.create(params);

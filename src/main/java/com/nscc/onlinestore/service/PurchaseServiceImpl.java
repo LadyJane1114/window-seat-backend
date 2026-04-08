@@ -70,8 +70,8 @@ public class PurchaseServiceImpl implements PurchaseService{
         }
 
         // Recalculate total
-        double total = purchase.getLineItems().stream()
-                .mapToDouble(li -> li.getUnitPrice() * li.getQuantity())
+        long total = purchase.getLineItems().stream()
+                .mapToLong(li -> (long) (li.getUnitPrice() * li.getQuantity()))
                 .sum();
         purchase.setPurchaseTotal(total);
 
@@ -103,8 +103,8 @@ public class PurchaseServiceImpl implements PurchaseService{
         }
 
         // Recalculate total
-        double total = purchase.getLineItems().stream()
-                .mapToDouble(li -> li.getUnitPrice() * li.getQuantity())
+        long total = purchase.getLineItems().stream()
+                .mapToLong(li -> (long) (li.getUnitPrice() * li.getQuantity()))
                 .sum();
         purchase.setPurchaseTotal(total);
 
@@ -123,8 +123,8 @@ public class PurchaseServiceImpl implements PurchaseService{
         }
 
         // Set total
-        double total = purchase.getLineItems().stream()
-                .mapToDouble(li -> li.getUnitPrice() * li.getQuantity())
+        long total = purchase.getLineItems().stream()
+                .mapToLong(li -> li.getUnitPrice() * li.getQuantity())
                 .sum();
         purchase.setPurchaseTotal(total);
 
@@ -140,8 +140,8 @@ public class PurchaseServiceImpl implements PurchaseService{
         addLineItem(purchase, lineItemDTO.getProductId(), lineItemDTO.getQuantity());
 
         // Update total
-        double total = purchase.getLineItems().stream()
-                .mapToDouble(li -> li.getUnitPrice() * li.getQuantity())
+        long total = purchase.getLineItems().stream()
+                .mapToLong(li -> li.getUnitPrice() * li.getQuantity())
                 .sum();
         purchase.setPurchaseTotal(total);
 

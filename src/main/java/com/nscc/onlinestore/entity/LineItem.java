@@ -12,7 +12,7 @@ public class LineItem {
     private Long lineItemID;
 
     private Integer quantity;
-    private Double unitPrice;
+    private Long unitPrice;
 
     //Relationships
     @ManyToOne(fetch = FetchType.LAZY)

@@ -19,8 +19,7 @@ public class ProductCreateDTO {
     private String prodStory;
 
     @NotNull
-    @DecimalMin("0.0")
-    private Double prodPrice;
+    private Long prodPrice;
 
     private String prodImgURL;
 

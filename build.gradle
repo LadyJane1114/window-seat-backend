@@ -42,6 +42,15 @@ dependencies {
 //    stripeeee
     implementation 'com.stripe:stripe-java:31.2.0'
 //    version was chosen on because Mike tested it, and knows that this version works.
+
+//    ai bot
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+}
+//also required for the ai bot to work
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:2.0.0-M2"
+    }
 }
 
 tasks.named('test') {
