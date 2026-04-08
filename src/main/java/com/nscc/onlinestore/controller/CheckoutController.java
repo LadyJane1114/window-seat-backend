@@ -23,10 +23,10 @@ public class CheckoutController {
     private final ProductService productService;
 
 
-    public CheckoutController(ProductService productService,@Value("{stripe.api.key") String STRIPE_KEY){
+    public CheckoutController(ProductService productService,@Value("${stripe.api.key") String STRIPE_KEY){
         this.productService = productService;
 
-        Stripe.apiKey = STRIPE_KEY; ///trying to push
+        Stripe.apiKey = STRIPE_KEY; ///trying to push again
     }
 
     //post mapping
