@@ -26,7 +26,7 @@ public class CheckoutController {
     public CheckoutController(ProductService productService,@Value("{stripe.api.key") String STRIPE_KEY){
         this.productService = productService;
 
-        Stripe.apiKey = STRIPE_KEY;
+        Stripe.apiKey = STRIPE_KEY; ///trying to push
     }
 
     //post mapping
