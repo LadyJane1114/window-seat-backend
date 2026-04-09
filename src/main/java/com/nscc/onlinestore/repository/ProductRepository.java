@@ -9,9 +9,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product,Long>{
+
+    @Query("SELECT p FROM Product p JOIN FETCH p.category")
+    List<Product> findAllWithCategory();
+
     @Modifying
     @Transactional
     @Query("""

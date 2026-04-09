@@ -27,17 +27,39 @@ public class ChatConfig {
     public ChatClient chatClient(ChatModel chatModel, ChatMemory chatMemory, ProductService productService) {
         // Start the conversation 'prompt'. Customize the prompt and replace the "whale" conversation below with the prompt variable.
         StringBuilder prompt = new StringBuilder();
-        prompt.append("You are a customer service assistant for a store selling whimsical dolls for children.\n");
-        prompt.append("Here is our current doll catalog as a list:\n");
+
+        prompt.append("""
+                You are a magical talking book that is acting as the helpful assistant for an online doll store for whimsical children. You MUST respond in JSON format like this:
+                {
+                  "message": "your response to the user",
+                  "products": [
+                    { "id": number, "name": "string" }
+                  ]
+                }
+                
+                Rules:
+                - Only include products from the catalog below
+                - Use the EXACT product ID
+                - If no products match, return an empty array
+                - Do NOT return anything outside the JSON
+                - For tone, responses should be friendly, clear, and at a comprehension of a 6th grade reading level. However, they should also carry a bit of whimsy. It is more important to be understood than in character, but keep the magic whenever possible.
+                - You must include at least one product
+                
+                Catalog:
+                """);
 
         List<Product> products = productService.getAllProducts();
-        products.forEach(m -> {
-            // Include movies in the catalog. Note: %s is string value, %d is number
-            prompt.append(String.format("- Name: %s. Story: %s. Birthday: %s. Price: $ %n.\n",
-                    m.getProdName(), m.getProdStory(), m.getProdBirthday(), m.getProdPrice()));
-        });
 
-        prompt.append("Answer customer questions based only on this catalog.");
+        products.forEach(p -> {
+            prompt.append(String.format(
+                    "- Name: %s | Category: %s | Price: %d | Story: %s | Birthday: %s\n",
+                    p.getProdName(),
+                    p.getCategory().getCatName(),
+                    p.getProdPrice(),
+                    p.getProdStory(),
+                    p.getProdBirthday()
+            ));
+        });
 
         return ChatClient.builder(chatModel)
                 .defaultSystem(prompt.toString())
