@@ -1,8 +1,7 @@
 package com.nscc.onlinestore.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -45,6 +44,6 @@ public class Product {
     //Relationships
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoryID",nullable = false)
-    @JsonBackReference
+    @JsonIgnoreProperties("products")
     private Category category;
 }
