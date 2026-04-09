@@ -44,7 +44,7 @@ public class CheckoutController {
             Product product = productService.getProductByID(cartItem.getItemID())
                     .orElseThrow(()-> new RuntimeException("Product not found!"));
             //get the price
-            Long price = product.getProdPrice();
+            Long price = product.getProdPrice() *100;
 
             paramsBuilder.addLineItem(
                     SessionCreateParams.LineItem.builder()
